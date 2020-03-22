@@ -46,6 +46,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv'
@@ -55,6 +56,11 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  proxy: {
+    '/api': {
+      target: 'http://localhost:8080'
+    }
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
