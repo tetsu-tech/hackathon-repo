@@ -38,7 +38,7 @@
 export default {
   data() {
     return {
-      loading: true,
+      loading: false,
       headers: [{ text: 'Title', value: 'title' }],
       desserts: [
         {
