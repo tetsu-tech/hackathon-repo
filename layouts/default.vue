@@ -55,12 +55,12 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'テンプレートの作成',
+          title: 'テンプレート',
           to: '/templates'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'ISSUEの作成',
+          title: 'ISSUE',
           to: '/issues'
         }
       ],
