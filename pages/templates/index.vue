@@ -11,7 +11,18 @@
       to="/templates/add"
       >追加</v-btn
     >
-    <v-card class="mt-5">
+    <v-container
+      v-if="loading"
+      fill-height
+      align-center
+      justify-center
+      ma-0
+      class="mx-auto"
+      style="height: 260px"
+    >
+      <v-progress-circular indeterminate color="black" width="1" size="50" />
+    </v-container>
+    <v-card v-if="!loading" class="mt-5">
       <v-data-table
         :headers="headers"
         :items="desserts"
@@ -27,6 +38,7 @@
 export default {
   data() {
     return {
+      loading: true,
       headers: [{ text: 'Title', value: 'title' }],
       desserts: [
         {
@@ -42,5 +54,16 @@ export default {
       ]
     }
   }
+  // async created() {
+  //   this.loading = true
+  //   await this.getTemplates()
+  //   this.loading = false
+  // },
+  // methods: {
+  //   async getTemplates() {
+  //     const { data } = await this.$axios('/api/templates')
+  //     this.desserts = data
+  //   }
+  // }
 }
 </script>
