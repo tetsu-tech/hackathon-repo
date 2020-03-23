@@ -52,79 +52,78 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component({})
+export default class IssueAddPage extends Vue {
+  createdNotice: boolean = false
+  validIssue: boolean = false
+  title: string = ''
+  body: string = ''
+  issueTemplate: any = null
+  bodies: any[] = []
+
+  get issue() {
     return {
-      createdNotice: false,
-      validIssue: false,
-
-      title: '',
-      body: '',
-
-      issueTemplate: null,
-      bodies: []
-    }
-  },
-  computed: {
-    issue() {
-      return {
-        title: this.title,
-        body: this.bodies.map((val) => {
-          return `### ${val.name}\n\n${val.description}`
-        })
-      }
-    },
-    items() {
-      return [
-        {
-          title: 'バグ報告',
-          template_items: [
-            {
-              name: 'バグの内容',
-              description: '- XXができない\n- XXがおかしい'
-            },
-            {
-              name: '関連するURL',
-              description: '- XXができない\n- XXがおかしい'
-            }
-          ]
-        },
-        {
-          title: '機能リクエスト',
-          template_items: [
-            {
-              name: 'バグの内容',
-              description: '- XXができない\n- XXがおかしい'
-            },
-            {
-              name: '関連するURL',
-              description: '- XXができない\n- XXがおかしい'
-            }
-          ]
-        }
-      ]
-    },
-    selectedItem() {
-      return Boolean(this.issueTemplate && this.issueTemplate.title)
-    }
-  },
-  methods: {
-    initBodies(issueTemplate) {
-      this.bodies = issueTemplate.template_items.map((item) => {
-        return {
-          title: item.name,
-          description: item.description
-        }
+      title: this.title,
+      body: this.bodies.map((val) => {
+        return `### ${val.name}\n\n${val.description}`
       })
-    },
-    createIssue() {
-      this.createdNotice = true
-      console.log('ISSUEを作成しました。', this.issue)
-    },
-    requireString(v) {
-      return !!v || '必須項目です'
     }
+  }
+
+  get items() {
+    return [
+      {
+        title: 'バグ報告',
+        template_items: [
+          {
+            name: 'バグの内容',
+            description: '- XXができない\n- XXがおかしい'
+          },
+          {
+            name: '関連するURL',
+            description: '- XXができない\n- XXがおかしい'
+          }
+        ]
+      },
+      {
+        title: '機能リクエスト',
+        template_items: [
+          {
+            name: 'バグの内容',
+            description: '- XXができない\n- XXがおかしい'
+          },
+          {
+            name: '関連するURL',
+            description: '- XXができない\n- XXがおかしい'
+          }
+        ]
+      }
+    ]
+  }
+
+  get selectedItem() {
+    return Boolean(this.issueTemplate && this.issueTemplate.title)
+  }
+
+  initBodies(issueTemplate: any) {
+    this.bodies = issueTemplate.template_items.map((item: any) => {
+      return {
+        title: item.name,
+        description: item.description
+      }
+    })
+  }
+
+  createIssue() {
+    this.createdNotice = true
+    console.log('ISSUEを作成しました。', this.issue)
+  }
+
+  requireString(v: any) {
+    return !!v || '必須項目です'
   }
 }
 </script>

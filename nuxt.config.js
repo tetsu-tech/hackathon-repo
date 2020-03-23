@@ -40,6 +40,10 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/vuetify'
   ],
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true
+  },
   /*
    ** Nuxt.js modules
    */

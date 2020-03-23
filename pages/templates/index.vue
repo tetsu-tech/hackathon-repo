@@ -34,36 +34,26 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      loading: false,
-      headers: [{ text: 'Title', value: 'title' }],
-      desserts: [
-        {
-          title: 'hogheogheo',
-          template_items: [
-            {
-              order: 1,
-              name: 'cghoaghoah',
-              description: 'hgoehogh'
-            }
-          ]
-        }
-      ]
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component({})
+export default class TemplatePage extends Vue {
+  loading: boolean = false
+  headers: any[] = [{ text: 'Title', value: 'title' }]
+  desserts: any[] = [
+    {
+      title: 'hogheogheo'
     }
-  }
+  ]
   // async created() {
   //   this.loading = true
   //   await this.getTemplates()
   //   this.loading = false
-  // },
-  // methods: {
+  // }
   //   async getTemplates() {
   //     const { data } = await this.$axios('/api/templates')
   //     this.desserts = data
   //   }
-  // }
 }
 </script>
