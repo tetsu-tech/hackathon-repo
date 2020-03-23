@@ -44,47 +44,48 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component({})
+export default class TemplateAddPage extends Vue {
+  createdNotice: boolean = false
+  validIssueTemplate: boolean = false
+  title: string = ''
+  // TODO: 全てchamelcaseに統一する
+  // eslint-disable-next-line camelcase
+  template_items: any[] = [
+    {
+      name: '',
+      description: ''
+    }
+  ]
+
+  get issueTemaplate() {
     return {
-      createdNotice: false,
-      validIssueTemplate: false,
-      title: '',
-      template_items: [
-        {
-          name: '',
-          description: ''
-        }
-      ]
-    }
-  },
-  computed: {
-    issueTemaplate() {
-      return {
-        title: this.title,
-        template_items: this.template_items.map((item, i) =>
-          Object.assign(item, { order: i + 1 })
-        )
-      }
-    }
-  },
-  methods: {
-    addTemplateItems() {
-      this.template_items.push({
-        name: '',
-        description: ''
-      })
-    },
-    createIssueTemplate() {
-      this.createdNotice = true
-      alert(
-        `テンプレートを作成しました。\n${JSON.stringify(this.issueTemaplate)}`
+      title: this.title,
+      template_items: this.template_items.map((item, i) =>
+        Object.assign(item, { order: i + 1 })
       )
-    },
-    requireString(v) {
-      return !!v || '必須項目です'
     }
+  }
+
+  addTemplateItems() {
+    this.template_items.push({
+      name: '',
+      description: ''
+    })
+  }
+
+  createIssueTemplate() {
+    this.createdNotice = true
+    alert(
+      `テンプレートを作成しました。\n${JSON.stringify(this.issueTemaplate)}`
+    )
+  }
+
+  requireString(v: any) {
+    return !!v || '必須項目です'
   }
 }
 </script>
