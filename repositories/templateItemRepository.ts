@@ -8,12 +8,20 @@ export interface TemplateItemResponse {
 }
 
 export class TemplateItemRepository {
-  static createTemplateInstance(data: TemplateItemResponse): TemplateItem {
+  createTemplateInstance(data: TemplateItemResponse): TemplateItem {
     const templateItem = new TemplateItem()
     templateItem.id = data._id
     templateItem.order = Number(data.order)
     templateItem.name = data.name
     templateItem.description = data.description
     return templateItem
+  }
+
+  toCreateParams(templateItem: TemplateItem) {
+    return {
+      order: templateItem.order,
+      name: templateItem.name,
+      description: templateItem.description
+    }
   }
 }
