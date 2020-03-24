@@ -8,9 +8,9 @@
         新規のISSUE
       </v-card-title>
       <v-card-text class="mt-4">
-        <v-form v-model="validIssue" class="mt-4">
+        <div class="mt-4">
           <v-select
-            v-model="issueTemplate"
+            v-model="template"
             :items="items"
             label="Solo field"
             solo
@@ -18,29 +18,29 @@
             return-object
             @change="initBodies"
           ></v-select>
-          {{ bodies }}
-          <div v-if="selectedItem">
+          <div v-if="selectedTemplate">
             タイトル
-            <v-text-field v-model="title" solo :rules="[requireString]" />
-            <div v-for="(item, i) in issueTemplate.template_items" :key="i">
+            <v-text-field v-model="issue.title" solo :rules="[requireString]" />
+            <div v-for="(item, i) in template.templateItems" :key="i">
               <p class="black--text font-weight-bold subtitle-1">
                 {{ item.name }}
               </p>
               <v-textarea
                 v-model="bodies[i].description"
                 solo
-                :rules="[requireString]"
+                :rules="[issue.requireValue]"
+                @change="changeIssue"
               />
             </div>
           </div>
-        </v-form>
+        </div>
       </v-card-text>
       <v-card-actions>
         <v-btn
           width="160"
           height="40"
           color="primary"
-          :disabled="!validIssue"
+          :disabled="!issue.canCrete"
           @click="createIssue"
           >生成</v-btn
         >
@@ -54,62 +54,32 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Issue } from '@/models/issue'
+import { Template } from '@/models/template'
+
+interface InputIssueBody {
+  name: string
+  description: string
+}
 
 @Component({})
 export default class IssueAddPage extends Vue {
   createdNotice: boolean = false
-  validIssue: boolean = false
-  title: string = ''
-  body: string = ''
-  issueTemplate: any = null
-  bodies: any[] = []
 
-  get issue() {
-    return {
-      title: this.title,
-      body: this.bodies.map((val) => {
-        return `### ${val.name}\n\n${val.description}`
-      })
-    }
-  }
+  issue: Issue = new Issue()
+  template: Template | null = null
+  bodies: InputIssueBody[] = []
 
   get items() {
-    return [
-      {
-        title: 'バグ報告',
-        template_items: [
-          {
-            name: 'バグの内容',
-            description: '- XXができない\n- XXがおかしい'
-          },
-          {
-            name: '関連するURL',
-            description: '- XXができない\n- XXがおかしい'
-          }
-        ]
-      },
-      {
-        title: '機能リクエスト',
-        template_items: [
-          {
-            name: 'バグの内容',
-            description: '- XXができない\n- XXがおかしい'
-          },
-          {
-            name: '関連するURL',
-            description: '- XXができない\n- XXがおかしい'
-          }
-        ]
-      }
-    ]
+    return [Template.createMock(), Template.createMock()]
   }
 
-  get selectedItem() {
-    return Boolean(this.issueTemplate && this.issueTemplate.title)
+  get selectedTemplate() {
+    return Boolean(this.template && this.template.title)
   }
 
-  initBodies(issueTemplate: any) {
-    this.bodies = issueTemplate.template_items.map((item: any) => {
+  initBodies(template: any) {
+    this.bodies = template.map((item: any) => {
       return {
         title: item.name,
         description: item.description
@@ -117,13 +87,19 @@ export default class IssueAddPage extends Vue {
     })
   }
 
+  private get toBody() {
+    return this.bodies.map((b) => `### ${b.name}\n\n${b.description}`)
+  }
+
+  changeIssue() {
+    this.issue.body = this.toBody.reduce((pre: string, cur: string) => {
+      return pre ? `${pre}\n\n${cur}` : cur
+    }, '')
+  }
+
   createIssue() {
     this.createdNotice = true
     console.log('ISSUEを作成しました。', this.issue)
-  }
-
-  requireString(v: any) {
-    return !!v || '必須項目です'
   }
 }
 </script>

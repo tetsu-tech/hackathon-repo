@@ -83,9 +83,5 @@ export default class TemplateAddPage extends Vue {
       `テンプレートを作成しました。\n${JSON.stringify(this.issueTemaplate)}`
     )
   }
-
-  requireString(v: any) {
-    return !!v || '必須項目です'
-  }
 }
 </script>
