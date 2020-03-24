@@ -25,7 +25,7 @@
     <v-card v-if="!loading" class="mt-5">
       <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="templates"
         hide-default-header
         hide-default-footer
         class="elevation-1"
@@ -36,16 +36,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Template } from '@/models/template'
 
 @Component({})
 export default class TemplatePage extends Vue {
   loading: boolean = false
   headers: any[] = [{ text: 'Title', value: 'title' }]
-  desserts: any[] = [
-    {
-      title: 'hogheogheo'
-    }
-  ]
+  templates: Template[] = [Template.createMock(), Template.createMock()]
   // async created() {
   //   this.loading = true
   //   await this.getTemplates()
