@@ -1,8 +1,5 @@
 export abstract class BaseEntity<T> {
-  id: number
-  createdAt: Date
-  updatedAt: Date
-  loading: boolean = false
+  id: string
 
   requireValue(v: any) {
     return !!v || '必須項目です'
