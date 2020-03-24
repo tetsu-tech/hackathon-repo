@@ -5,6 +5,8 @@ import {
 import { api } from '@/plugins/api'
 import { Template } from '@/models/template'
 
+const BASE_API = '/templates'
+
 export interface TemplateResponse {
   _id: string
   title: string
@@ -30,12 +32,12 @@ export class TemplateRepository {
   }
 
   async find(): Promise<Template[]> {
-    const { data } = await api.get('/templates')
+    const { data } = await api.get(BASE_API)
     return data.map((d: any) => this.createTemplateInstance(d))
   }
 
   async get(): Promise<Template> {
-    const { data } = await api.get('/templates')
+    const { data } = await api.get(BASE_API)
     return this.createTemplateInstance(data)
   }
 
@@ -49,6 +51,6 @@ export class TemplateRepository {
   }
 
   async create(template: Template) {
-    await api.post('/issues', this.toCreateParams(template))
+    await api.post(BASE_API, this.toCreateParams(template))
   }
 }
