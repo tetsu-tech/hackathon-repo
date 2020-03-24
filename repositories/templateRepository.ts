@@ -14,8 +14,8 @@ export interface TemplateResponse {
 export class TemplateRepository {
   templateItemRepository: TemplateItemRepository
 
-  constructor(templateItemRepository: TemplateItemRepository) {
-    this.templateItemRepository = templateItemRepository
+  constructor() {
+    this.templateItemRepository = new TemplateItemRepository()
   }
 
   createTemplateInstance(data: any): Template {

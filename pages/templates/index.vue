@@ -28,7 +28,6 @@
         :items="templates"
         hide-default-header
         hide-default-footer
-        class="elevation-1"
       />
     </v-card>
   </div>
@@ -37,20 +36,19 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Template } from '@/models/template'
+import { TemplateRepository } from '@/repositories/templateRepository'
 
 @Component({})
 export default class TemplatePage extends Vue {
   loading: boolean = false
   headers: any[] = [{ text: 'Title', value: 'title' }]
   templates: Template[] = [Template.createMock(), Template.createMock()]
-  // async created() {
-  //   this.loading = true
-  //   await this.getTemplates()
-  //   this.loading = false
-  // }
-  //   async getTemplates() {
-  //     const { data } = await this.$axios('/api/templates')
-  //     this.desserts = data
-  //   }
+  templateRepository: TemplateRepository = new TemplateRepository()
+
+  async created() {
+    this.loading = true
+    this.templates = await this.templateRepository.find()
+    this.loading = false
+  }
 }
 </script>
