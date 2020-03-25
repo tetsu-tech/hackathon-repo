@@ -11,8 +11,8 @@ export class Template extends BaseEntity<Template> {
     })
   }
 
-  addTemplateItem(templateItem: TemplateItem) {
-    this.templateItems.push(templateItem)
+  addTemplateItem() {
+    this.templateItems.push(new TemplateItem())
     this.setTemplateItemOrder()
   }
 

@@ -32,7 +32,11 @@
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn width="160" height="40" color="primary" @click="addTemplateItem"
+        <v-btn
+          width="160"
+          height="40"
+          color="primary"
+          @click="template.addTemplateItem()"
           >項目を追加</v-btn
         >
         <v-spacer />
@@ -55,7 +59,6 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Template } from '@/models/template'
-import { TemplateItem } from '@/models/templateItem'
 import { TemplateRepository } from '@/repositories/templateRepository'
 
 @Component({})
@@ -64,10 +67,6 @@ export default class TemplateAddPage extends Vue {
   loading: boolean = false
   template: Template = new Template()
   templateRepository: TemplateRepository = new TemplateRepository()
-
-  addTemplateItem() {
-    this.template.addTemplateItem(new TemplateItem())
-  }
 
   async createIssueTemplate() {
     this.loading = true
