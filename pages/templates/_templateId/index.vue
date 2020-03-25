@@ -29,7 +29,7 @@
           color="scondary"
           width="170"
           height="42"
-          >ISSUEの追加</v-btn
+          >ISSUEの作成</v-btn
         >
       </v-card-actions>
       <v-divider class="my-5" />
@@ -78,14 +78,3 @@ export default class TemplatePage extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.accent-button {
-  box-shadow: 0px 0px 15px -10px #b53c31;
-  border-radius: 10px;
-}
-.secondary-button {
-  box-shadow: 0px 0px 13px -4px #2150b7;
-  border-radius: 10px;
-}
-</style>

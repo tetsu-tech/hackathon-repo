@@ -17,7 +17,7 @@
             <v-list-item-title v-text="organaization"></v-list-item-title>
           </v-list-item-content>
           <v-list-item-action class="my-0">
-            <v-btn icon>
+            <v-btn icon @click="templateDialog = true">
               <v-icon color="#929BAB" size="20">
                 mdi-plus-circle
               </v-icon>
@@ -47,18 +47,25 @@
         </v-card>
       </v-container>
     </v-content>
+    <TemplateEdit :dialog="templateDialog" @close="templateDialog = false" />
   </v-app>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Template } from '../models/template'
-import { TemplateRepository } from '../repositories/templateRepository'
+import { Template } from '@/models/template'
+import { TemplateRepository } from '@/repositories/templateRepository'
+import TemplateEdit from '@/components/TemplateEdit.vue'
 
-@Component({})
+@Component({
+  components: {
+    TemplateEdit
+  }
+})
 export default class Default extends Vue {
   organaization: string = 'tetsu-tech'
   loading: boolean = false
+  templateDialog: boolean = false
   templates: Template[] = []
   templateRepository: TemplateRepository = new TemplateRepository()
 
@@ -80,5 +87,26 @@ export default class Default extends Vue {
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
   overflow: hidden;
+}
+</style>
+<style lang="scss">
+.accent-button {
+  box-shadow: 0px 0px 15px -10px #b53c31;
+  border-radius: 10px;
+}
+.secondary-button {
+  box-shadow: 0px 0px 13px -4px #2150b7;
+  border-radius: 10px;
+}
+.v-text-field--rounded {
+  border-radius: 12px;
+}
+.v-text-field--filled.v-input--dense.v-text-field--single-line
+  > .v-input__control
+  > .v-input__slot {
+  border: solid 1.4px #cecccc;
+}
+.theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+  background-color: #f4f6fb !important;
 }
 </style>
