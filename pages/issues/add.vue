@@ -31,7 +31,7 @@
           ></v-select>
           <div v-if="selectedTemplate">
             タイトル
-            <v-text-field v-model="issue.title" solo :rules="[requireString]" />
+            <v-text-field v-model="issue.title" solo :rules="[issue.requireValue]" />
             <div v-for="(item, i) in template.templateItems" :key="i">
               <p class="black--text font-weight-bold subtitle-1">
                 {{ item.name }}
@@ -97,7 +97,7 @@ export default class IssueAddPage extends Vue {
   }
 
   initBodies(template: any) {
-    this.bodies = template.map((item: any) => {
+    this.bodies = template.templateItems.map((item: any) => {
       return {
         title: item.name,
         description: item.description
