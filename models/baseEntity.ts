@@ -8,8 +8,4 @@ export abstract class BaseEntity<T> {
   get hasId(): boolean {
     return Boolean(this.id)
   }
-
-  equals(entity: BaseEntity<T>): boolean {
-    return this.id === entity.id
-  }
 }
