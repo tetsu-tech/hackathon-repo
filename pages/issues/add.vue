@@ -3,7 +3,18 @@
     <h1 class="title mt-5">
       ISSUEの作成
     </h1>
-    <v-card class="mt-3">
+    <v-container
+      v-if="loading"
+      fill-height
+      align-center
+      justify-center
+      ma-0
+      class="mx-auto"
+      style="height: 260px"
+    >
+      <v-progress-circular indeterminate color="black" width="1" size="50" />
+    </v-container>
+    <v-card v-if="!loading" class="mt-3">
       <v-card-title>
         新規のISSUE
       </v-card-title>
@@ -11,7 +22,7 @@
         <div class="mt-4">
           <v-select
             v-model="template"
-            :items="items"
+            :items="templates"
             label="Solo field"
             solo
             item-text="title"
@@ -54,6 +65,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { TemplateRepository } from '@/repositories/templateRepository'
 import { Issue } from '@/models/issue'
 import { Template } from '@/models/template'
 
@@ -65,13 +77,19 @@ interface InputIssueBody {
 @Component({})
 export default class IssueAddPage extends Vue {
   createdNotice: boolean = false
+  loading: boolean = false
+
+  templateRepository: TemplateRepository = new TemplateRepository()
 
   issue: Issue = new Issue()
+  templates: Template[] = []
   template: Template | null = null
   bodies: InputIssueBody[] = []
 
-  get items() {
-    return [Template.createMock(), Template.createMock()]
+  async created() {
+    this.loading = true
+    this.templates = await this.templateRepository.find()
+    this.loading = false
   }
 
   get selectedTemplate() {

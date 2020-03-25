@@ -5,12 +5,6 @@ export class Template extends BaseEntity<Template> {
   title: string = ''
   templateItems: TemplateItem[] = []
 
-  static createMock() {
-    const t = new Template()
-    t.title = '機能用テンプレート'
-    return t
-  }
-
   private setTemplateItemOrder() {
     this.templateItems.forEach((item, i) => {
       item.order = i + 1

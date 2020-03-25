@@ -42,7 +42,7 @@ import { TemplateRepository } from '@/repositories/templateRepository'
 export default class TemplatePage extends Vue {
   loading: boolean = false
   headers: any[] = [{ text: 'Title', value: 'title' }]
-  templates: Template[] = [Template.createMock(), Template.createMock()]
+  templates: Template[] = []
   templateRepository: TemplateRepository = new TemplateRepository()
 
   async created() {
