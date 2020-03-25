@@ -1,22 +1,11 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        <v-btn text to="/templates">テンプレート</v-btn>
-        <v-btn text>issue</v-btn>
-      </div>
-    </v-flex>
-  </v-layout>
+  <v-layout column justify-center align-center> </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
+  asyncData({ redirect }) {
+    redirect('/templates')
   }
 }
 </script>

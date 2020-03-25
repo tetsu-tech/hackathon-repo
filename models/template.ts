@@ -16,6 +16,18 @@ export class Template extends BaseEntity<Template> {
     this.setTemplateItemOrder()
   }
 
+  get canDeleteTemplateItem(): boolean {
+    return Boolean(this.templateItems.length)
+  }
+
+  deleteTemplateItem() {
+    if (!this.canDeleteTemplateItem) {
+      return
+    }
+    this.templateItems.pop()
+    this.setTemplateItemOrder()
+  }
+
   private get canCreateAllTemplateItem(): boolean {
     return this.templateItems.every((item) => item.canCreate)
   }

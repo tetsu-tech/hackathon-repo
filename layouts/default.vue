@@ -95,7 +95,12 @@ export default class Default extends Vue {
   border-radius: 10px;
 }
 .secondary-button {
+  color: white !important;
+  font-weight: bold !important;
   box-shadow: 0px 0px 13px -4px #2150b7;
+  border-radius: 10px;
+}
+.disable-secondary-button {
   border-radius: 10px;
 }
 .v-text-field--rounded {
