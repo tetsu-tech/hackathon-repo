@@ -106,7 +106,7 @@ export default class IssueAddPage extends Vue {
   }
 
   private get toBody() {
-    return this.bodies.map((b) => `### ${b.name}\n\n${b.description}`)
+    return this.bodies.map((b) => `### ${b.title}\n\n${b.description}`)
   }
 
   changeIssue() {
