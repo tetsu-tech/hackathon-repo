@@ -51,7 +51,7 @@
           width="160"
           height="40"
           color="primary"
-          :disabled="!issue.canCrete"
+          :disabled="!issue.canCreate"
           @click="createIssue"
           >生成</v-btn
         >
