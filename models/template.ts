@@ -12,8 +12,15 @@ export class Template extends BaseEntity<Template> {
   }
 
   addTemplateItem() {
+    if (!this.canAddTemplateItem) {
+      return
+    }
     this.templateItems.push(new TemplateItem())
     this.setTemplateItemOrder()
+  }
+
+  get canAddTemplateItem(): boolean {
+    return Boolean(this.templateItems.length <= 10)
   }
 
   get canDeleteTemplateItem(): boolean {

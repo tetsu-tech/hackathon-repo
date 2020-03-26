@@ -43,7 +43,12 @@
                 :rules="[item.requireValue]"
               />
             </div>
-            <v-btn color="primary" text @click="template.addTemplateItem()">
+            <v-btn
+              color="primary"
+              text
+              :disabled="!template.canAddTemplateItem"
+              @click="template.addTemplateItem()"
+            >
               <v-icon>mdi-plus</v-icon>
               項目を追加</v-btn
             >
@@ -109,9 +114,10 @@ export default class TemplateEdit extends Vue {
 
   async createIssueTemplate() {
     this.loading = true
-    await this.templateRepository.create(this.template)
+    const newTemplate = await this.templateRepository.create(this.template)
     this.createdNotice = true
     this.close()
+    this.$router.push(`/templates/${newTemplate.id}`)
     this.loading = false
   }
 }

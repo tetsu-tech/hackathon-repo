@@ -50,7 +50,8 @@ export class TemplateRepository {
     }
   }
 
-  async create(template: Template) {
-    await api.post(BASE_API, this.toCreateParams(template))
+  async create(template: Template): Promise<Template> {
+    const { data } = await api.post(BASE_API, this.toCreateParams(template))
+    return this.createTemplateInstance(data)
   }
 }
