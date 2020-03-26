@@ -9,22 +9,34 @@
       </v-card-title>
       <v-card-text class="mt-4">
         タイトル
-        <v-text-field v-model="title" solo :rules="[requireString]" />
-        <v-form v-model="validIssueTemplate" class="mt-4">
-          <div v-for="(item, i) in template_items" :key="i">
+        <v-text-field
+          v-model="template.title"
+          solo
+          :rules="[template.requireValue]"
+        />
+        <div class="mt-4">
+          <div v-for="(item, i) in template.templateItems" :key="i">
             項目名
-            <v-text-field v-model="item.name" solo :rules="[requireString]" />
+            <v-text-field
+              v-model="item.name"
+              solo
+              :rules="[item.requireValue]"
+            />
             説明
             <v-textarea
               v-model="item.description"
               solo
-              :rules="[requireString]"
+              :rules="[item.requireValue]"
             />
           </div>
-        </v-form>
+        </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn width="160" height="40" color="primary" @click="addTemplateItems"
+        <v-btn
+          width="160"
+          height="40"
+          color="primary"
+          @click="template.addTemplateItem()"
           >項目を追加</v-btn
         >
         <v-spacer />
@@ -32,7 +44,7 @@
           width="160"
           height="40"
           color="primary"
-          :disabled="!validIssueTemplate"
+          :disabled="!template.canCreate"
           @click="createIssueTemplate"
           >生成</v-btn
         >
@@ -46,46 +58,23 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Template } from '@/models/template'
+import { TemplateRepository } from '@/repositories/templateRepository'
 
 @Component({})
 export default class TemplateAddPage extends Vue {
   createdNotice: boolean = false
-  validIssueTemplate: boolean = false
-  title: string = ''
-  // TODO: 全てchamelcaseに統一する
-  // eslint-disable-next-line camelcase
-  template_items: any[] = [
-    {
-      name: '',
-      description: ''
-    }
-  ]
+  loading: boolean = false
+  template: Template = new Template()
+  templateRepository: TemplateRepository = new TemplateRepository()
 
-  get issueTemaplate() {
-    return {
-      title: this.title,
-      template_items: this.template_items.map((item, i) =>
-        Object.assign(item, { order: i + 1 })
-      )
-    }
-  }
-
-  addTemplateItems() {
-    this.template_items.push({
-      name: '',
-      description: ''
-    })
-  }
-
-  createIssueTemplate() {
+  async createIssueTemplate() {
+    this.loading = true
+    await this.templateRepository.create(this.template)
     this.createdNotice = true
-    alert(
-      `テンプレートを作成しました。\n${JSON.stringify(this.issueTemaplate)}`
-    )
-  }
-
-  requireString(v: any) {
-    return !!v || '必須項目です'
+    this.loading = false
+    alert(`テンプレートを作成しました。`)
+    this.$router.push('/templates')
   }
 }
 </script>
