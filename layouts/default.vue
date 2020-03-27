@@ -47,7 +47,11 @@
         </v-card>
       </v-container>
     </v-content>
-    <TemplateEdit :dialog="templateDialog" @close="templateDialog = false" />
+    <TemplateEdit
+      :dialog="templateDialog"
+      @close="templateDialog = false"
+      @created-template="goToTemplatePage"
+    />
   </v-app>
 </template>
 
@@ -70,9 +74,17 @@ export default class Default extends Vue {
   templateRepository: TemplateRepository = new TemplateRepository()
 
   async created() {
+    await this.findTemplates()
+  }
+
+  async findTemplates() {
     this.loading = true
     this.templates = await this.templateRepository.find()
     this.loading = false
+  }
+
+  goToTemplatePage(template: Template) {
+    this.$router.push(`/templates/${template.id}`)
   }
 }
 </script>

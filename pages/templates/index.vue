@@ -6,7 +6,7 @@
         align-center
         justify-center
         class="mx-auto"
-        style="height: 70vh"
+        style="height: 90vh"
       >
         <v-row>
           <v-col cols="12">
@@ -17,7 +17,7 @@
               class="mx-auto"
             />
           </v-col>
-          <v-col cols="12" class="py-0">
+          <v-col cols="12" class="mt-4 py-0">
             <h3 class="title font-weight-bold">テンプレートを追加</h3>
           </v-col>
           <v-col cols="12" class="py-0">
@@ -38,12 +38,17 @@
         </v-row>
       </v-container>
     </v-card-text>
-    <TemplateEdit :dialog="templateDialog" @close="templateDialog = false" />
+    <TemplateEdit
+      :dialog="templateDialog"
+      @close="templateDialog = false"
+      @created-template="goToTemplatePage"
+    />
   </v-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Template } from '@/models/template'
 import TemplateEdit from '@/components/TemplateEdit.vue'
 
 @Component({
@@ -53,5 +58,9 @@ import TemplateEdit from '@/components/TemplateEdit.vue'
 })
 export default class TemplatePage extends Vue {
   templateDialog: boolean = false
+
+  goToTemplatePage(template: Template) {
+    this.$router.push(`/templates/${template.id}`)
+  }
 }
 </script>

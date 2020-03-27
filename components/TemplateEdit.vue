@@ -88,7 +88,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-snackbar v-model="createdNotice" right color="success">
+    <v-snackbar
+      v-model="createdNotice"
+      right
+      color="success"
+      class="font-weight-bold"
+    >
       テンプレートを作成しました
     </v-snackbar>
   </div>
@@ -112,12 +117,17 @@ export default class TemplateEdit extends Vue {
   @Emit('close')
   close() {}
 
+  @Emit('created-template')
+  createdTemplate(template: Template) {
+    return template
+  }
+
   async createIssueTemplate() {
     this.loading = true
     const newTemplate = await this.templateRepository.create(this.template)
     this.createdNotice = true
+    this.createdTemplate(newTemplate)
     this.close()
-    this.$router.push(`/templates/${newTemplate.id}`)
     this.loading = false
   }
 }
