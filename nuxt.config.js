@@ -1,6 +1,3 @@
-const ENV_FILE = `./.env.${process.env.NODE_ENV}`
-require('dotenv').config({ path: ENV_FILE })
-
 const env = () => {
   if (process.env.NODE_ENV === 'development') {
     return 'dev'
