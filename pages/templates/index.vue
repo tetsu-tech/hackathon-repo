@@ -1,54 +1,66 @@
 <template>
-  <div>
-    <h1 class="title mt-5">
-      テンプレートの一覧
-    </h1>
-    <v-btn
-      class="mt-3"
-      color="primary"
-      width="160"
-      height="40"
-      to="/templates/add"
-      >追加</v-btn
-    >
-    <v-container
-      v-if="loading"
-      fill-height
-      align-center
-      justify-center
-      ma-0
-      class="mx-auto"
-      style="height: 260px"
-    >
-      <v-progress-circular indeterminate color="black" width="1" size="50" />
-    </v-container>
-    <v-card v-if="!loading" class="mt-5">
-      <v-data-table
-        :headers="headers"
-        :items="templates"
-        hide-default-header
-        hide-default-footer
-      />
-    </v-card>
-  </div>
+  <v-card flat>
+    <v-card-text class="primary--text text-center">
+      <v-container
+        fill-height
+        align-center
+        justify-center
+        class="mx-auto"
+        style="height: 90vh"
+      >
+        <v-row>
+          <v-col cols="12">
+            <v-img
+              src="/add_template.png"
+              max-width="360"
+              contain
+              class="mx-auto"
+            />
+          </v-col>
+          <v-col cols="12" class="mt-4 py-0">
+            <h3 class="title font-weight-bold">テンプレートを追加</h3>
+          </v-col>
+          <v-col cols="12" class="py-0">
+            <p>
+              Issueを簡単に作成できるテンプレートを追加します
+            </p>
+          </v-col>
+          <v-col cols="12" class="mt-3">
+            <v-btn
+              class="white--text font-weight-bold secondary-button"
+              color="scondary"
+              width="170"
+              height="42"
+              @click="templateDialog = true"
+              >追加する</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card-text>
+    <TemplateEdit
+      :dialog="templateDialog"
+      @close="templateDialog = false"
+      @created-template="goToTemplatePage"
+    />
+  </v-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Template } from '@/models/template'
-import { TemplateRepository } from '@/repositories/templateRepository'
+import TemplateEdit from '@/components/TemplateEdit.vue'
 
-@Component({})
+@Component({
+  components: {
+    TemplateEdit
+  }
+})
 export default class TemplatePage extends Vue {
-  loading: boolean = false
-  headers: any[] = [{ text: 'Title', value: 'title' }]
-  templates: Template[] = []
-  templateRepository: TemplateRepository = new TemplateRepository()
+  templateDialog: boolean = false
 
-  async created() {
-    this.loading = true
-    this.templates = await this.templateRepository.find()
-    this.loading = false
+  goToTemplatePage(template: Template) {
+    this.$router.push(`/templates/${template.id}`)
   }
 }
 </script>

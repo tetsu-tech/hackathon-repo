@@ -19,4 +19,13 @@ $ npm run start
 $ npm run generate
 ```
 
+## 環境変数設定
+
+### dotenvの設定
+
+```
+USER_NAME=
+USER_PASSWORD=
+```
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

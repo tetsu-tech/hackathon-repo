@@ -1,22 +1,19 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        <v-btn text to="/templates">テンプレート</v-btn>
-        <v-btn text>issue</v-btn>
-      </div>
-    </v-flex>
+    <Markdown v-model="data" />
   </v-layout>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import Markdown from '@/components/Markdown.vue'
 
-export default {
+@Component({
   components: {
-    Logo,
-    VuetifyLogo
+    Markdown
   }
+})
+export default class Page extends Vue {
+  data: string = ''
 }
 </script>

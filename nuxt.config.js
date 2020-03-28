@@ -1,19 +1,8 @@
-import colors from 'vuetify/es5/util/colors'
-
-const env = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return 'dev'
-  }
-  if (process.env.NODE_ENV === 'staging') {
-    return 'stage'
-  }
-  return 'prod'
-}
-const ENVIRONMENT = env()
-const ENV_FILE = `./.env.${ENVIRONMENT}`
-require('dotenv').config({ path: ENV_FILE })
-
 export default {
+  env: {
+    proxyTarget: process.env.PROXY_TARGET || 'http://localhost:8080',
+    EnvFile: process.env.ENV_FILE || ".env.dev"
+  },
   mode: 'spa',
   /*
    ** Headers of the page
@@ -43,7 +32,12 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    {
+      src: '@/plugins/vue-mavon-editor',
+      srr: false
+    }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -66,7 +60,13 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: ENV_FILE
+      }
+    ]
   ],
   /*
    ** Axios module configuration
@@ -75,7 +75,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: process.env.PROXY_TARGET
+      target: proxyTarget
     }
   },
   /*
@@ -83,7 +83,16 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ['~/assets/variables.scss']
+    customVariables: ['~/assets/variables.scss'],
+    theme: {
+      themes: {
+        light: {
+          primary: '#0B1D43',
+          scondary: '#2150B7',
+          accent: '#B53C31'
+        }
+      }
+    }
   },
   /*
    ** Build configuration

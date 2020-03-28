@@ -36,9 +36,9 @@ export class TemplateRepository {
     return data.map((d: any) => this.createTemplateInstance(d))
   }
 
-  async get(): Promise<Template> {
-    const { data } = await api.get(BASE_API)
-    return this.createTemplateInstance(data)
+  async get(id: string): Promise<Template> {
+    const { data } = await api.get(`${BASE_API}/${id}`)
+    return this.createTemplateInstance(data[0])
   }
 
   private toCreateParams(template: Template) {
@@ -50,7 +50,8 @@ export class TemplateRepository {
     }
   }
 
-  async create(template: Template) {
-    await api.post(BASE_API, this.toCreateParams(template))
+  async create(template: Template): Promise<Template> {
+    const { data } = await api.post(BASE_API, this.toCreateParams(template))
+    return this.createTemplateInstance(data)
   }
 }
