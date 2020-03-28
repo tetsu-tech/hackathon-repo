@@ -21,7 +21,7 @@ $ npm run generate
 
 ## 環境変数設定
 
-### dotenvの設定
+### dotenvの設定( .env )
 
 ```
 USER_NAME=
