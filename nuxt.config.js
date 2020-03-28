@@ -1,5 +1,5 @@
 require('dotenv').config()
-const baseUrl = process.env || 'http://localhost:8080'
+const baseUrl = process.env.BASE_URL || 'http://localhost:8080'
 
 export default {
   mode: 'spa',
