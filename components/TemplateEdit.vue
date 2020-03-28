@@ -106,7 +106,7 @@ import { TemplateRepository } from '@/repositories/templateRepository'
 
 @Component({})
 export default class TemplateEdit extends Vue {
-  @Prop({ default: true })
+  @Prop({ default: false })
   dialog!: boolean
 
   createdNotice: boolean = false

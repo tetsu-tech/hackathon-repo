@@ -27,6 +27,9 @@
               <span class="primary--text body-2 font-weight-bold">{{
                 item.name
               }}</span>
+              <p class="mt-2 primary--text body-2">
+                {{ item.description }}
+              </p>
               <v-textarea
                 v-model="bodies[i].description"
                 class="mt-2 "
@@ -89,7 +92,7 @@ interface InputIssueBody {
 
 @Component({})
 export default class IssueEdit extends Vue {
-  @Prop({ default: true })
+  @Prop({ default: false })
   dialog!: boolean
 
   @Prop({ required: true })
@@ -121,7 +124,7 @@ export default class IssueEdit extends Vue {
     this.bodies = this.template.templateItems.map((item: TemplateItem) => {
       return {
         name: item.name,
-        description: item.description
+        description: ''
       }
     })
   }
