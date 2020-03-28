@@ -64,7 +64,7 @@ export default {
     [
       '@nuxtjs/dotenv',
       {
-        filename: ENV_FILE
+        filename: EnvFile
       }
     ]
   ],
