@@ -1,8 +1,7 @@
+require('dotenv').config()
+const baseUrl = process.env || 'http://localhost:8080'
+
 export default {
-  env: {
-    PROXY_TARGET: process.env.PROXY_TARGET || 'http://localhost:8080',
-    ENV_FILE: process.env.ENV_FILE || ".env.dev"
-  },
   mode: 'spa',
   /*
    ** Headers of the page
@@ -64,7 +63,7 @@ export default {
     [
       '@nuxtjs/dotenv',
       {
-        filename: process.env.ENV_FILE
+        filename: ".env"
       }
     ]
   ],
@@ -75,7 +74,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: process.env.PROXY_TARGET
+      target: baseUrl
     }
   },
   /*
