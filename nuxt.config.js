@@ -9,6 +9,9 @@ const ENV_FILE = `./.env.${ENVIRONMENT}`
 require('dotenv').config({ path: ENV_FILE })
 
 export default {
+  env: {
+    proxyTarget: process.env.PROXY_TARGET || 'http://localhost:8080'
+  },
   mode: 'spa',
   /*
    ** Headers of the page
