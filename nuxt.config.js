@@ -5,9 +5,6 @@ const env = () => {
   if (process.env.NODE_ENV === 'development') {
     return 'dev'
   }
-  if (process.env.NODE_ENV === 'staging') {
-    return 'stage'
-  }
   return 'prod'
 }
 const ENVIRONMENT = env()
