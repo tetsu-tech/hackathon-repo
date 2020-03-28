@@ -52,4 +52,9 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+.markdown-body {
+  border: solid 1.4px #cecccc;
+}
+
 </style>
