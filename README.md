@@ -19,4 +19,9 @@ $ npm run start
 $ npm run generate
 ```
 
+## 環境変数設定
+USER_NAME=tetsu-sample
+USER_PASSWORD=sample
+BASE_API_URL=http://localhost:8080
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

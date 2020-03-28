@@ -1,3 +1,6 @@
+const ENV_FILE = `./.env.${process.env.NODE_ENV}`
+require('dotenv').config({ path: ENV_FILE })
+
 export default {
   mode: 'spa',
   /*
@@ -56,7 +59,13 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: ENV_FILE
+      }
+    ]
   ],
   /*
    ** Axios module configuration
@@ -65,7 +74,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: 'http://localhost:8080'
+      target: process.env.BASE_API_URL
     }
   },
   /*
