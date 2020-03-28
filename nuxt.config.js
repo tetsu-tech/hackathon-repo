@@ -81,7 +81,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: process.env.PROXY_TARGET
+      target: proxyTarget
     }
   },
   /*
