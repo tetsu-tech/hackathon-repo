@@ -3,13 +3,10 @@
     <h1 class="title mt-5">
       ISSUEの一覧
     </h1>
-    <v-btn class="mt-3" color="primary" width="160" height="40" to="/issues/add"
-      >追加</v-btn
-    >
     <v-card class="mt-5">
       <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="issues"
         hide-default-header
         hide-default-footer
         class="elevation-1"
@@ -18,24 +15,30 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      headers: [{ text: 'Title', value: 'title' }],
-      desserts: [
-        {
-          title: 'hogheogheo',
-          template_items: [
-            {
-              order: 1,
-              name: 'cghoaghoah',
-              description: 'hgoehogh'
-            }
-          ]
-        }
-      ]
-    }
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import { Issue } from '@/models/issue'
+import { IssueRepository } from '@/repositories/issueRepository'
+
+@Component({})
+export default class IssueListPage extends Vue {
+  loading: boolean = false
+  issueDialog: boolean = false
+  issues: Issue[] = []
+  issueRepository: IssueRepository = new IssueRepository()
+
+  get headers() {
+    return [{ text: 'Title', value: 'title' }]
+  }
+
+  async created() {
+    await this.findIssues()
+  }
+
+  async findIssues() {
+    this.loading = true
+    this.issues = await this.issueRepository.find()
+    this.loading = false
   }
 }
 </script>
