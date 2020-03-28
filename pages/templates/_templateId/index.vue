@@ -29,6 +29,7 @@
           color="scondary"
           width="170"
           height="42"
+          @click="issueDialog = true"
           >ISSUEの作成</v-btn
         >
       </v-card-actions>
@@ -54,6 +55,11 @@
         </v-list>
       </v-card-text>
     </div>
+    <IssueEdit
+      :dialog="issueDialog"
+      :template="template"
+      @close="issueDialog = false"
+    />
   </v-card>
 </template>
 
@@ -61,10 +67,16 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Template } from '@/models/template'
 import { TemplateRepository } from '@/repositories/templateRepository'
+import IssueEdit from '@/components/IssueEdit.vue'
 
-@Component({})
+@Component({
+  components: {
+    IssueEdit
+  }
+})
 export default class TemplatePage extends Vue {
   loading: boolean = false
+  issueDialog: boolean = false
   template: Template = new Template()
   templateRepository: TemplateRepository = new TemplateRepository()
 

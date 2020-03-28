@@ -15,7 +15,7 @@
             filled
             rounded
             dense
-            class="mt-2 text_field_background"
+            class="mt-2 "
             :rules="[template.requireValue]"
           ></v-text-field>
           <div class="mt-4">
@@ -30,7 +30,7 @@
                 filled
                 rounded
                 dense
-                class="mt-2 text_field_background"
+                class="mt-2 "
                 :rules="[item.requireValue]"
               />
               <span class="primary--text body-2 font-weight-bold">説明</span>
@@ -39,7 +39,7 @@
                 filled
                 rounded
                 dense
-                class="mt-2 text_field_background"
+                class="mt-2 "
                 :rules="[item.requireValue]"
               />
             </div>

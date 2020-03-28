@@ -31,7 +31,11 @@
           ></v-select>
           <div v-if="selectedTemplate">
             タイトル
-            <v-text-field v-model="issue.title" solo :rules="[issue.requireValue]" />
+            <v-text-field
+              v-model="issue.title"
+              solo
+              :rules="[issue.requireValue]"
+            />
             <div v-for="(item, i) in template.templateItems" :key="i">
               <p class="black--text font-weight-bold subtitle-1">
                 {{ item.name }}
