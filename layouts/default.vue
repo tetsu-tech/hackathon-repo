@@ -24,6 +24,14 @@
             </v-btn>
           </v-list-item-action>
         </v-list-item>
+        <v-list-item to="/issues">
+          <v-list-item-action class="mr-3">
+            <v-icon color="white" size="20">mdi-alert-circle-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content class="white--text font-weight-bold my-0">
+            <v-list-item-title>ISSUE一覧</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item
           v-for="(template, i) in templates"
           :key="i"
