@@ -21,6 +21,7 @@
         :headers="headers"
         :items="issues"
         hide-default-footer
+        @click:row="clickIssue"
       >
         <template v-slot:item.title="{ item }">
           <span class="primary--text subtitle-1">
@@ -64,6 +65,11 @@
         </template>
       </v-data-table>
     </v-card>
+    <IssueView
+      :issue="currentIssue"
+      :dialog="issueDialog"
+      @close="issueDialog = false"
+    />
   </div>
 </template>
 
@@ -72,13 +78,19 @@ import moment from 'moment'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Issue } from '@/models/issue'
 import { IssueRepository } from '@/repositories/issueRepository'
+import IssueView from '@/components/IssueView.vue'
 
-@Component({})
+@Component({
+  components: {
+    IssueView
+  }
+})
 export default class IssueListPage extends Vue {
   loading: boolean = false
   issueDialog: boolean = false
   issues: Issue[] = []
   issueRepository: IssueRepository = new IssueRepository()
+  currentIssue: Issue | null = null
 
   get headers() {
     return [
@@ -106,7 +118,7 @@ export default class IssueListPage extends Vue {
   }
 
   clickIssue(issue: Issue) {
-    console.log(issue)
+    this.currentIssue = issue
     this.issueDialog = true
   }
 }
