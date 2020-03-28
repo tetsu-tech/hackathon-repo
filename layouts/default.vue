@@ -7,7 +7,7 @@
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title class="title font-weight-bold white--text">
-            Github issue
+            Issue Happy
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -50,7 +50,7 @@
       <v-container class="pa-0 mt-0 mr-0">
         <v-card id="content_base_card" height="100vh" class="pa-5">
           <div>
-            <nuxt />
+            <nuxt @fetch-templates="findTemplates" />
           </div>
         </v-card>
       </v-container>
