@@ -85,7 +85,6 @@ export default class TemplatePage extends Vue {
     this.template = await this.templateRepository.get(
       this.$route.params.templateId
     )
-    this.issueDialog = true
     this.loading = false
   }
 }
