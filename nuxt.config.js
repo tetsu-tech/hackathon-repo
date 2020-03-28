@@ -1,5 +1,5 @@
-const ENV_FILE = `./.env.${process.env.NODE_ENV}`
-require('dotenv').config({ path: ENV_FILE })
+require('dotenv').config()
+const baseUrl = process.env.BASE_URL || 'http://localhost:8080'
 
 export default {
   mode: 'spa',
@@ -63,7 +63,7 @@ export default {
     [
       '@nuxtjs/dotenv',
       {
-        filename: ENV_FILE
+        filename: ".env"
       }
     ],
     '@nuxtjs/markdownit'
@@ -82,7 +82,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: process.env.BASE_API_URL
+      target: baseUrl
     }
   },
   /*

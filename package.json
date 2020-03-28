@@ -21,6 +21,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "mavon-editor": "^2.7.7",
     "moment": "^2.24.0",
+    "dotenv": "^8.2.0",
     "nuxt": "latest",
     "nuxt-property-decorator": "^2.5.1"
   },
