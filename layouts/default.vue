@@ -7,7 +7,7 @@
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title class="title font-weight-bold white--text">
-            Issue Happy
+            Happy Issue
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
