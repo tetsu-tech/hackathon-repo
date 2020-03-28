@@ -1,6 +1,7 @@
 export default {
   env: {
-    proxyTarget: process.env.PROXY_TARGET || 'http://localhost:8080'
+    proxyTarget: process.env.PROXY_TARGET || 'http://localhost:8080',
+    EnvFile: process.env.ENV_FILE || ".env.dev"
   },
   mode: 'spa',
   /*
