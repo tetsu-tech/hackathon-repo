@@ -1,7 +1,7 @@
 export default {
   env: {
-    proxyTarget: process.env.PROXY_TARGET || 'http://localhost:8080',
-    EnvFile: process.env.ENV_FILE || ".env.dev"
+    PROXY_TARGET: process.env.PROXY_TARGET || 'http://localhost:8080',
+    ENV_FILE: process.env.ENV_FILE || ".env.dev"
   },
   mode: 'spa',
   /*
@@ -64,7 +64,7 @@ export default {
     [
       '@nuxtjs/dotenv',
       {
-        filename: EnvFile
+        filename: process.env.ENV_FILE
       }
     ]
   ],
@@ -75,7 +75,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: proxyTarget
+      target: process.env.PROXY_TARGET
     }
   },
   /*
