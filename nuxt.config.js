@@ -1,6 +1,19 @@
 const ENV_FILE = `./.env.${process.env.NODE_ENV}`
 require('dotenv').config({ path: ENV_FILE })
 
+const env = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return 'dev'
+  }
+  if (process.env.NODE_ENV === 'staging') {
+    return 'stage'
+  }
+  return 'prod'
+}
+const ENVIRONMENT = env()
+const ENV_FILE = `./.env.${ENVIRONMENT}`
+require('dotenv').config({ path: ENV_FILE })
+
 export default {
   mode: 'spa',
   /*
@@ -74,7 +87,7 @@ export default {
   axios: {},
   proxy: {
     '/api': {
-      target: process.env.BASE_API_URL
+      target: process.env.PROXY_TARGET
     }
   },
   /*
