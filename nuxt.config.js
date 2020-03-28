@@ -1,13 +1,3 @@
-const env = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return 'dev'
-  }
-  return 'prod'
-}
-const ENVIRONMENT = env()
-const ENV_FILE = `./.env.${ENVIRONMENT}`
-require('dotenv').config({ path: ENV_FILE })
-
 export default {
   env: {
     proxyTarget: process.env.PROXY_TARGET || 'http://localhost:8080'
