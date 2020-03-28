@@ -15,7 +15,7 @@
             filled
             rounded
             dense
-            class="mt-2 "
+            class="mt-2"
             :rules="[issue.requireValue]"
           ></v-text-field>
           <div class="mt-4">
@@ -32,7 +32,7 @@
               </p>
               <v-textarea
                 v-model="bodies[i].description"
-                class="mt-2 "
+                class="mt-2"
                 filled
                 rounded
                 dense
