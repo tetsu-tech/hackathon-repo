@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog :value="dialog" max-width="700" scrollable>
+    <v-dialog :value="dialog" max-width="1000" scrollable>
       <v-card v-if="dialog" class="pa-5">
         <v-card-title class="primary--text font-weight-bold">
           ISSUEの作成
@@ -22,7 +22,7 @@
             <div
               v-for="(item, i) in template.templateItems"
               :key="i"
-              class="mb-4"
+              style="margin-bottom: 60px;"
             >
               <span class="primary--text body-2 font-weight-bold">{{
                 item.name
@@ -30,13 +30,9 @@
               <p class="mt-2 primary--text body-2">
                 {{ item.description }}
               </p>
-              <v-textarea
+              <Markdown
                 v-model="bodies[i].description"
                 class="mt-2"
-                filled
-                rounded
-                dense
-                :rules="[issue.requireValue]"
                 @input="changeIssue"
               />
             </div>
@@ -84,13 +80,18 @@ import { TemplateItem } from '../models/templateItem'
 import { Issue } from '@/models/issue'
 import { IssueRepository } from '@/repositories/issueRepository'
 import { Template } from '@/models/template'
+import Markdown from '@/components/Markdown.vue'
 
 interface InputIssueBody {
   name: string
   description: string
 }
 
-@Component({})
+@Component({
+  components: {
+    Markdown
+  }
+})
 export default class IssueEdit extends Vue {
   @Prop({ default: false })
   dialog!: boolean
