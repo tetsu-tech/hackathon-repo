@@ -41,6 +41,10 @@ export class TemplateRepository {
     return this.createTemplateInstance(data[0])
   }
 
+  async delete(template: Template): Promise<void> {
+    await api.delete(`${BASE_API}/${template.id}`)
+  }
+
   private toCreateParams(template: Template) {
     return {
       title: template.title,

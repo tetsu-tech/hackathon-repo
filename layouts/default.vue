@@ -7,7 +7,7 @@
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title class="title font-weight-bold white--text">
-            Github issue
+            Happy Issue
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -23,6 +23,14 @@
               </v-icon>
             </v-btn>
           </v-list-item-action>
+        </v-list-item>
+        <v-list-item to="/issues">
+          <v-list-item-action class="mr-3">
+            <v-icon color="white" size="20">mdi-alert-circle-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content class="white--text font-weight-bold my-0">
+            <v-list-item-title>ISSUE一覧</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
         <v-list-item
           v-for="(template, i) in templates"
@@ -42,7 +50,7 @@
       <v-container class="pa-0 mt-0 mr-0">
         <v-card id="content_base_card" height="100vh" class="pa-5">
           <div>
-            <nuxt />
+            <nuxt @fetch-templates="findTemplates" />
           </div>
         </v-card>
       </v-container>
