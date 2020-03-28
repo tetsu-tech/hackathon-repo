@@ -22,6 +22,8 @@
           color="white"
           width="170"
           height="42"
+          :loading="deleteLoading"
+          @click="deleteTemplate"
           >テンプレートの削除</v-btn
         >
         <v-btn
@@ -76,6 +78,7 @@ import IssueEdit from '@/components/IssueEdit.vue'
 })
 export default class TemplatePage extends Vue {
   loading: boolean = false
+  deleteLoading: boolean = false
   issueDialog: boolean = false
   template: Template = new Template()
   templateRepository: TemplateRepository = new TemplateRepository()
@@ -86,6 +89,12 @@ export default class TemplatePage extends Vue {
       this.$route.params.templateId
     )
     this.loading = false
+  }
+
+  async deleteTemplate() {
+    await this.templateRepository.delete(this.template)
+    alert('削除しました')
+    this.$router.push('/templates')
   }
 }
 </script>
